@@ -1,0 +1,426 @@
+[
+  {
+    "type": "lens",
+    "gridData": {
+      "x": 0,
+      "y": 0,
+      "w": 12,
+      "h": 12,
+      "i": "da6ad24b-8d41-4d24-9848-f0cab8ee4785"
+    },
+    "panelIndex": "da6ad24b-8d41-4d24-9848-f0cab8ee4785",
+    "embeddableConfig": {
+      "attributes": {
+        "title": "",
+        "visualizationType": "lnsMetric",
+        "type": "lens",
+        "references": [
+          {
+            "type": "index-pattern",
+            "id": "90943e30-9a47-11e8-b64d-95841ca0b247",
+            "name": "indexpattern-datasource-layer-ee15a3c0-5305-4437-bbdf-fe7601f00157"
+          }
+        ],
+        "state": {
+          "visualization": {
+            "layerId": "ee15a3c0-5305-4437-bbdf-fe7601f00157",
+            "layerType": "data",
+            "metricAccessor": "9c4667f0-314f-4877-8742-c0b093518bb7"
+          },
+          "query": {
+            "query": "",
+            "language": "kuery"
+          },
+          "filters": [],
+          "datasourceStates": {
+            "formBased": {
+              "layers": {
+                "ee15a3c0-5305-4437-bbdf-fe7601f00157": {
+                  "columns": {
+                    "9c4667f0-314f-4877-8742-c0b093518bb7": {
+                      "label": "Visits",
+                      "dataType": "number",
+                      "operationType": "count",
+                      "isBucketed": false,
+                      "scale": "ratio",
+                      "sourceField": "___records___",
+                      "params": {
+                        "emptyAsNull": true
+                      },
+                      "customLabel": true
+                    }
+                  },
+                  "columnOrder": ["9c4667f0-314f-4877-8742-c0b093518bb7"],
+                  "incompleteColumns": {},
+                  "sampling": 1,
+                  "indexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"
+                }
+              },
+              "currentIndexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"
+            },
+            "indexpattern": {
+              "layers": {}
+            },
+            "textBased": {
+              "layers": {}
+            }
+          },
+          "internalReferences": [],
+          "adHocDataViews": {}
+        },
+        "enhancements": {}
+      }
+    }
+  },
+  {
+    "type": "lens",
+    "gridData": {
+      "x": 12,
+      "y": 0,
+      "w": 13,
+      "h": 12,
+      "i": "e11f294e-3855-4ace-ae7f-a60f71262a20"
+    },
+    "panelIndex": "e11f294e-3855-4ace-ae7f-a60f71262a20",
+    "embeddableConfig": {
+      "attributes": {
+        "title": "",
+        "visualizationType": "lnsPie",
+        "type": "lens",
+        "references": [
+          {
+            "type": "index-pattern",
+            "id": "90943e30-9a47-11e8-b64d-95841ca0b247",
+            "name": "indexpattern-datasource-layer-7af22111-e5e0-42ef-a10e-9bd1451058e5"
+          }
+        ],
+        "state": {
+          "visualization": {
+            "shape": "pie",
+            "layers": [
+              {
+                "layerId": "7af22111-e5e0-42ef-a10e-9bd1451058e5",
+                "primaryGroups": ["c8b51517-08c6-4e08-9615-ba6b71865972"],
+                "metrics": ["f169849c-3234-4402-a2d0-51dc371ec126"],
+                "numberDisplay": "percent",
+                "categoryDisplay": "default",
+                "legendDisplay": "default",
+                "nestedLegend": false,
+                "layerType": "data",
+                "colorMapping": {
+                  "assignments": [],
+                  "specialAssignments": [
+                    {
+                      "rule": {
+                        "type": "other"
+                      },
+                      "color": {
+                        "type": "loop"
+                      },
+                      "touched": false
+                    }
+                  ],
+                  "paletteId": "eui_amsterdam_color_blind",
+                  "colorMode": {
+                    "type": "categorical"
+                  }
+                }
+              }
+            ]
+          },
+          "query": {
+            "query": "",
+            "language": "kuery"
+          },
+          "filters": [],
+          "datasourceStates": {
+            "formBased": {
+              "layers": {
+                "7af22111-e5e0-42ef-a10e-9bd1451058e5": {
+                  "columns": {
+                    "c8b51517-08c6-4e08-9615-ba6b71865972": {
+                      "label": "Top 5 values of machine.os.keyword",
+                      "dataType": "string",
+                      "operationType": "terms",
+                      "scale": "ordinal",
+                      "sourceField": "machine.os.keyword",
+                      "isBucketed": true,
+                      "params": {
+                        "size": 5,
+                        "orderBy": {
+                          "type": "column",
+                          "columnId": "f169849c-3234-4402-a2d0-51dc371ec126"
+                        },
+                        "orderDirection": "desc",
+                        "otherBucket": true,
+                        "missingBucket": false,
+                        "parentFormat": {
+                          "id": "terms"
+                        },
+                        "include": [],
+                        "exclude": [],
+                        "includeIsRegex": false,
+                        "excludeIsRegex": false
+                      }
+                    },
+                    "f169849c-3234-4402-a2d0-51dc371ec126": {
+                      "label": "Count of records",
+                      "dataType": "number",
+                      "operationType": "count",
+                      "isBucketed": false,
+                      "scale": "ratio",
+                      "sourceField": "___records___",
+                      "params": {
+                        "emptyAsNull": true
+                      }
+                    }
+                  },
+                  "columnOrder": [
+                    "c8b51517-08c6-4e08-9615-ba6b71865972",
+                    "f169849c-3234-4402-a2d0-51dc371ec126"
+                  ],
+                  "incompleteColumns": {},
+                  "sampling": 1
+                }
+              }
+            },
+            "indexpattern": {
+              "layers": {}
+            },
+            "textBased": {
+              "layers": {}
+            }
+          },
+          "internalReferences": [],
+          "adHocDataViews": {}
+        },
+        "enhancements": {},
+        "title": "Most used OS"
+      }
+    }
+  },
+  {
+    "type": "lens",
+    "gridData": {
+      "x": 0,
+      "y": 12,
+      "w": 12,
+      "h": 12,
+      "i": "eb5d01fe-8e75-4a41-ae95-3ebbbe977ecf"
+    },
+    "panelIndex": "eb5d01fe-8e75-4a41-ae95-3ebbbe977ecf",
+    "embeddableConfig": {
+      "attributes": {
+        "title": "",
+        "visualizationType": "lnsMetric",
+        "type": "lens",
+        "references": [
+          {
+            "type": "index-pattern",
+            "id": "90943e30-9a47-11e8-b64d-95841ca0b247",
+            "name": "indexpattern-datasource-layer-5ae8c93b-c081-4cf0-934f-12bed4b131d1"
+          }
+        ],
+        "state": {
+          "visualization": {
+            "layerId": "5ae8c93b-c081-4cf0-934f-12bed4b131d1",
+            "layerType": "data",
+            "metricAccessor": "3e966bb6-e715-4ea9-b572-ec7a28860977"
+          },
+          "query": {
+            "query": "",
+            "language": "kuery"
+          },
+          "filters": [],
+          "datasourceStates": {
+            "formBased": {
+              "layers": {
+                "5ae8c93b-c081-4cf0-934f-12bed4b131d1": {
+                  "columns": {
+                    "3e966bb6-e715-4ea9-b572-ec7a28860977": {
+                      "label": "Unique Visitors",
+                      "dataType": "number",
+                      "operationType": "unique_count",
+                      "scale": "ratio",
+                      "sourceField": "clientip",
+                      "isBucketed": false,
+                      "params": {
+                        "emptyAsNull": true
+                      },
+                      "customLabel": true
+                    }
+                  },
+                  "columnOrder": ["3e966bb6-e715-4ea9-b572-ec7a28860977"],
+                  "sampling": 1,
+                  "ignoreGlobalFilters": false,
+                  "incompleteColumns": {}
+                }
+              }
+            },
+            "indexpattern": {
+              "layers": {}
+            },
+            "textBased": {
+              "layers": {}
+            }
+          },
+          "internalReferences": [],
+          "adHocDataViews": {}
+        },
+        "enhancements": {}
+      }
+    }
+  },
+  {
+    "type": "lens",
+    "gridData": {
+      "x": 12,
+      "y": 12,
+      "w": 13,
+      "h": 12,
+      "i": "513b851c-1697-44ac-a0f3-e0a6217940c8"
+    },
+    "panelIndex": "513b851c-1697-44ac-a0f3-e0a6217940c8",
+    "embeddableConfig": {
+      "attributes": {
+        "title": "",
+        "visualizationType": "lnsXY",
+        "type": "lens",
+        "references": [
+          {
+            "type": "index-pattern",
+            "id": "90943e30-9a47-11e8-b64d-95841ca0b247",
+            "name": "indexpattern-datasource-layer-078889ce-fc5c-4514-bc04-67b1f762c2bd"
+          }
+        ],
+        "state": {
+          "visualization": {
+            "legend": {
+              "isVisible": true,
+              "position": "right"
+            },
+            "valueLabels": "hide",
+            "fittingFunction": "None",
+            "axisTitlesVisibilitySettings": {
+              "x": true,
+              "yLeft": true,
+              "yRight": true
+            },
+            "tickLabelsVisibilitySettings": {
+              "x": true,
+              "yLeft": true,
+              "yRight": true
+            },
+            "labelsOrientation": {
+              "x": 0,
+              "yLeft": 0,
+              "yRight": 0
+            },
+            "gridlinesVisibilitySettings": {
+              "x": true,
+              "yLeft": true,
+              "yRight": true
+            },
+            "preferredSeriesType": "bar_stacked",
+            "layers": [
+              {
+                "layerId": "078889ce-fc5c-4514-bc04-67b1f762c2bd",
+                "accessors": ["7126c7b7-2228-45de-ac91-81b5ebaef22b"],
+                "position": "top",
+                "seriesType": "bar_stacked",
+                "showGridlines": false,
+                "layerType": "data",
+                "colorMapping": {
+                  "assignments": [],
+                  "specialAssignments": [
+                    {
+                      "rule": {
+                        "type": "other"
+                      },
+                      "color": {
+                        "type": "loop"
+                      },
+                      "touched": false
+                    }
+                  ],
+                  "paletteId": "eui_amsterdam_color_blind",
+                  "colorMode": {
+                    "type": "categorical"
+                  }
+                },
+                "xAccessor": "e7fff48d-c8f1-4e56-8d7c-c62e70b613e6"
+              }
+            ]
+          },
+          "query": {
+            "query": "",
+            "language": "kuery"
+          },
+          "filters": [],
+          "datasourceStates": {
+            "formBased": {
+              "layers": {
+                "078889ce-fc5c-4514-bc04-67b1f762c2bd": {
+                  "columns": {
+                    "e7fff48d-c8f1-4e56-8d7c-c62e70b613e6": {
+                      "label": "Top 5 values of geo.dest",
+                      "dataType": "string",
+                      "operationType": "terms",
+                      "scale": "ordinal",
+                      "sourceField": "geo.dest",
+                      "isBucketed": true,
+                      "params": {
+                        "size": 5,
+                        "orderBy": {
+                          "type": "column",
+                          "columnId": "7126c7b7-2228-45de-ac91-81b5ebaef22b"
+                        },
+                        "orderDirection": "desc",
+                        "otherBucket": false,
+                        "missingBucket": false,
+                        "parentFormat": {
+                          "id": "terms"
+                        },
+                        "include": [],
+                        "exclude": [],
+                        "includeIsRegex": false,
+                        "excludeIsRegex": false
+                      }
+                    },
+                    "7126c7b7-2228-45de-ac91-81b5ebaef22b": {
+                      "label": "Count of records",
+                      "dataType": "number",
+                      "operationType": "count",
+                      "isBucketed": false,
+                      "scale": "ratio",
+                      "sourceField": "___records___",
+                      "params": {
+                        "emptyAsNull": true
+                      }
+                    }
+                  },
+                  "columnOrder": [
+                    "e7fff48d-c8f1-4e56-8d7c-c62e70b613e6",
+                    "7126c7b7-2228-45de-ac91-81b5ebaef22b"
+                  ],
+                  "incompleteColumns": {},
+                  "sampling": 1
+                }
+              }
+            },
+            "indexpattern": {
+              "layers": {}
+            },
+            "textBased": {
+              "layers": {}
+            }
+          },
+          "internalReferences": [],
+          "adHocDataViews": {}
+        },
+        "enhancements": {},
+        "title": "State Geo Dest"
+      }
+    }
+  }
+]

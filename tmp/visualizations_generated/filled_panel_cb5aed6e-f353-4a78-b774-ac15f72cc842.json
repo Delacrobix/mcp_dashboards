@@ -1,0 +1,75 @@
+{
+  "type": "lens",
+  "gridData": {
+    "x": 0,
+    "y": 0,
+    "w": 12,
+    "h": 12,
+    "i": "1b7eb5c1-e5db-4539-b526-a8de37b956d5"
+  },
+  "panelIndex": "1b7eb5c1-e5db-4539-b526-a8de37b956d5",
+  "embeddableConfig": {
+    "attributes": {
+      "title": "Displays the total number of visits, indicating overall traffic or engagement.",
+      "visualizationType": "lnsMetric",
+      "type": "lens",
+      "references": [
+        {
+          "type": "index-pattern",
+          "id": "68c2e548-5742-44c6-8ff2-1f18ae9cc3df",
+          "name": "indexpattern-datasource-layer-579c2a8c-35e4-4622-93a1-7a2295bcd766"
+        }
+      ],
+      "state": {
+        "visualization": {
+          "layerId": "579c2a8c-35e4-4622-93a1-7a2295bcd766",
+          "layerType": "data",
+          "metricAccessor": "cc2898e3-cf81-4e76-9b07-dc214358d00e"
+        },
+        "query": {
+          "query": "",
+          "language": "kuery"
+        },
+        "filters": [],
+        "datasourceStates": {
+          "formBased": {
+            "layers": {
+              "579c2a8c-35e4-4622-93a1-7a2295bcd766": {
+                "columns": {
+                  "cc2898e3-cf81-4e76-9b07-dc214358d00e": {
+                    "label": "Count of Visits",
+                    "dataType": "number",
+                    "operationType": "sum",
+                    "isBucketed": false,
+                    "scale": "ratio",
+                    "sourceField": "___records___",
+                    "params": {
+                      "emptyAsNull": true
+                    },
+                    "customLabel": true
+                  }
+                },
+                "columnOrder": [
+                  "cc2898e3-cf81-4e76-9b07-dc214358d00e"
+                ],
+                "incompleteColumns": {},
+                "sampling": 1,
+                "indexPatternId": "68c2e548-5742-44c6-8ff2-1f18ae9cc3df"
+              }
+            },
+            "currentIndexPatternId": "68c2e548-5742-44c6-8ff2-1f18ae9cc3df"
+          },
+          "indexpattern": {
+            "layers": {}
+          },
+          "textBased": {
+            "layers": {}
+          }
+        },
+        "internalReferences": [],
+        "adHocDataViews": {}
+      },
+      "enhancements": {}
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "type": "lens",
+  "gridData": {
+    "x": 0,
+    "y": 0,
+    "w": 12,
+    "h": 12,
+    "i": "{panel_id}"
+  },
+  "panelIndex": "{panel_id}",
+  "panelConfig": {
+    "attributes": {
+      "title": "{title}",
+      "visualizationType": "lnsMetric",
+      "type": "lens",
+      "references": [
+        {
+          "type": "index-pattern",
+          "id": "{index_pattern_id}",
+          "name": "indexpattern-datasource-layer-{layer_id}"
+        }
+      ],
+      "state": {
+        "visualization": {
+          "layerId": "{layer_id}",
+          "layerType": "data",
+          "metricAccessor": "{metric_accessor_id}"
+        },
+        "query": {
+          "query": "",
+          "language": "kuery"
+        },
+        "filters": [],
+        "datasourceStates": {
+          "formBased": {
+            "layers": {
+              "{layer_id}": {
+                "columns": {
+                  "{metric_accessor_id}": {
+                    "label": "{metric_label}",
+                    "dataType": "number",
+                    "operationType": "{operation_type}",
+                    "isBucketed": false,
+                    "scale": "ratio",
+                    "sourceField": "___records___",
+                    "params": {
+                      "emptyAsNull": true
+                    },
+                    "customLabel": true
+                  }
+                },
+                "columnOrder": ["{metric_accessor_id}"],
+                "incompleteColumns": {},
+                "sampling": 1,
+                "indexPatternId": "{index_pattern_id}"
+              }
+            },
+            "currentIndexPatternId": "{index_pattern_id}"
+          },
+          "indexpattern": {
+            "layers": {}
+          },
+          "textBased": {
+            "layers": {}
+          }
+        },
+        "internalReferences": [],
+        "adHocDataViews": {}
+      },
+      "enhancements": {}
+    }
+  }
+}

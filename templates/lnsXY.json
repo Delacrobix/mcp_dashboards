@@ -1,0 +1,150 @@
+{
+  "type": "lens",
+  "gridData": {
+    "x": 0,
+    "y": 12,
+    "w": 25,
+    "h": 12,
+    "i": "{panel_id}"
+  },
+  "panelIndex": "{panel_id}",
+  "embeddableConfig": {
+    "attributes": {
+      "title": "{title}",
+      "visualizationType": "lnsXY",
+      "type": "lens",
+      "references": [
+        {
+          "type": "index-pattern",
+          "id": "{index_pattern_id}",
+          "name": "indexpattern-datasource-layer-{layer_id}"
+        }
+      ],
+      "state": {
+        "visualization": {
+          "legend": {
+            "isVisible": true,
+            "position": "right"
+          },
+          "valueLabels": "hide",
+          "fittingFunction": "None",
+          "axisTitlesVisibilitySettings": {
+            "x": true,
+            "yLeft": true,
+            "yRight": true
+          },
+          "tickLabelsVisibilitySettings": {
+            "x": true,
+            "yLeft": true,
+            "yRight": true
+          },
+          "labelsOrientation": {
+            "x": 0,
+            "yLeft": 0,
+            "yRight": 0
+          },
+          "gridlinesVisibilitySettings": {
+            "x": true,
+            "yLeft": true,
+            "yRight": true
+          },
+          "preferredSeriesType": "{series_type}",
+          "layers": [
+            {
+              "layerId": "{layer_id}",
+              "accessors": ["{y_accessor_id}"],
+              "position": "top",
+              "seriesType": "{series_type}",
+              "showGridlines": false,
+              "layerType": "data",
+              "colorMapping": {
+                "assignments": [],
+                "specialAssignments": [
+                  {
+                    "rule": {
+                      "type": "other"
+                    },
+                    "color": {
+                      "type": "loop"
+                    },
+                    "touched": false
+                  }
+                ],
+                "paletteId": "eui_amsterdam_color_blind",
+                "colorMode": {
+                  "type": "categorical"
+                }
+              },
+              "xAccessor": "{x_accessor_id}"
+            }
+          ]
+        },
+        "query": {
+          "query": "",
+          "language": "kuery"
+        },
+        "filters": [],
+        "datasourceStates": {
+          "formBased": {
+            "layers": {
+              "{layer_id}": {
+                "columns": {
+                  "{x_accessor_id}": {
+                    "label": "{x_label}",
+                    "dataType": "{x_data_type}",
+                    "operationType": "{x_operation_type}",
+                    "scale": "ordinal",
+                    "sourceField": "{x_field}",
+                    "isBucketed": true,
+                    "params": {
+                      "size": "{size}",
+                      "orderBy": {
+                        "type": "column",
+                        "columnId": "{y_accessor_id}"
+                      },
+                      "orderDirection": "desc",
+                      "otherBucket": false,
+                      "missingBucket": false,
+                      "parentFormat": {
+                        "id": "terms"
+                      },
+                      "include": [],
+                      "exclude": [],
+                      "includeIsRegex": false,
+                      "excludeIsRegex": false
+                    }
+                  },
+                  "{y_accessor_id}": {
+                    "label": "{y_label}",
+                    "dataType": "number",
+                    "operationType": "{y_operation_type}",
+                    "isBucketed": false,
+                    "scale": "ratio",
+                    "sourceField": "{y_field}",
+                    "params": {
+                      "emptyAsNull": true
+                    }
+                  }
+                },
+                "columnOrder": ["{x_accessor_id}", "{y_accessor_id}"],
+                "incompleteColumns": {},
+                "sampling": 1,
+                "indexPatternId": "{index_pattern_id}"
+              }
+            },
+            "currentIndexPatternId": "{index_pattern_id}"
+          },
+          "indexpattern": {
+            "layers": {}
+          },
+          "textBased": {
+            "layers": {}
+          }
+        },
+        "internalReferences": [],
+        "adHocDataViews": {}
+      },
+      "enhancements": {}
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "type": "lens",
+  "gridData": {
+    "x": 12,
+    "y": 0,
+    "w": 13,
+    "h": 12,
+    "i": "b46e7c77-65c6-4208-9f6d-8288da7b8638"
+  },
+  "panelIndex": "b46e7c77-65c6-4208-9f6d-8288da7b8638",
+  "panelConfig": {
+    "attributes": {
+      "title": "A pie chart displaying the percentage distribution of the most used operating systems.",
+      "visualizationType": "lnsPie",
+      "type": "lens",
+      "references": [
+        {
+          "type": "index-pattern",
+          "id": "90943e30-9a47-11e8-b64d-95841ca0b247",
+          "name": "indexpattern-datasource-layer-b679939b-8cd1-4ec9-9e62-fa0fcc466a86"
+        }
+      ],
+      "state": {
+        "visualization": {
+          "shape": "pie",
+          "layers": [
+            {
+              "layerId": "b679939b-8cd1-4ec9-9e62-fa0fcc466a86",
+              "primaryGroups": [
+                "5741b5bc-d1b1-40c8-8642-568eadb85205"
+              ],
+              "metrics": [
+                "07671d33-f7a8-445f-b96e-9108aacd109d"
+              ],
+              "numberDisplay": "percent",
+              "categoryDisplay": "default",
+              "legendDisplay": "default",
+              "nestedLegend": false,
+              "layerType": "data",
+              "colorMapping": {
+                "assignments": [],
+                "specialAssignments": [
+                  {
+                    "rule": {
+                      "type": "other"
+                    },
+                    "color": {
+                      "type": "loop"
+                    },
+                    "touched": false
+                  }
+                ],
+                "paletteId": "eui_amsterdam_color_blind",
+                "colorMode": {
+                  "type": "categorical"
+                }
+              }
+            }
+          ]
+        },
+        "query": {
+          "query": "",
+          "language": "kuery"
+        },
+        "filters": [],
+        "datasourceStates": {
+          "formBased": {
+            "layers": {
+              "b679939b-8cd1-4ec9-9e62-fa0fcc466a86": {
+                "columns": {
+                  "5741b5bc-d1b1-40c8-8642-568eadb85205": {
+                    "label": "Top 5 values of Most used OS",
+                    "dataType": "string",
+                    "operationType": "terms",
+                    "scale": "ordinal",
+                    "sourceField": "Most used OS",
+                    "isBucketed": true,
+                    "params": {
+                      "size": "5",
+                      "orderBy": {
+                        "type": "column",
+                        "columnId": "07671d33-f7a8-445f-b96e-9108aacd109d"
+                      },
+                      "orderDirection": "desc",
+                      "otherBucket": true,
+                      "missingBucket": false,
+                      "parentFormat": {
+                        "id": "terms"
+                      },
+                      "include": [],
+                      "exclude": [],
+                      "includeIsRegex": false,
+                      "excludeIsRegex": false
+                    }
+                  },
+                  "07671d33-f7a8-445f-b96e-9108aacd109d": {
+                    "label": "Count of records",
+                    "dataType": "number",
+                    "operationType": "avg",
+                    "isBucketed": false,
+                    "scale": "ratio",
+                    "sourceField": "metrics",
+                    "params": {
+                      "emptyAsNull": true
+                    }
+                  }
+                },
+                "columnOrder": [
+                  "5741b5bc-d1b1-40c8-8642-568eadb85205",
+                  "07671d33-f7a8-445f-b96e-9108aacd109d"
+                ],
+                "incompleteColumns": {},
+                "sampling": 1,
+                "indexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"
+              }
+            },
+            "currentIndexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"
+          },
+          "indexpattern": {
+            "layers": {}
+          },
+          "textBased": {
+            "layers": {}
+          }
+        },
+        "internalReferences": [],
+        "adHocDataViews": {}
+      },
+      "enhancements": {}
+    }
+  }
+}
