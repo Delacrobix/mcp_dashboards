@@ -5,19 +5,19 @@
     "y": 0,
     "w": 13,
     "h": 12,
-    "i": "{panel_id}"
+    "i": "pie_panel_id"
   },
-  "panelIndex": "{panel_id}",
+  "panelIndex": "pie_panel_id",
   "panelConfig": {
     "attributes": {
-      "title": "{title}",
+      "title": "Pie chart",
       "visualizationType": "lnsPie",
       "type": "lens",
       "references": [
         {
           "type": "index-pattern",
           "id": "90943e30-9a47-11e8-b64d-95841ca0b247",
-          "name": "indexpattern-datasource-layer-{layer_id}"
+          "name": "indexpattern-datasource-layer-pie_layer_id"
         }
       ],
       "state": {
@@ -25,9 +25,9 @@
           "shape": "pie",
           "layers": [
             {
-              "layerId": "{layer_id}",
-              "primaryGroups": ["{group_accessor_id}"],
-              "metrics": ["{metric_accessor_id}"],
+              "layerId": "pie_layer_id",
+              "primaryGroups": ["group_1"],
+              "metrics": ["metric_1"],
               "numberDisplay": "percent",
               "categoryDisplay": "default",
               "legendDisplay": "default",
@@ -62,10 +62,10 @@
         "datasourceStates": {
           "formBased": {
             "layers": {
-              "{layer_id}": {
+              "pie_layer_id": {
                 "columns": {
-                  "{group_accessor_id}": {
-                    "label": "Top {size} values of {group_field}",
+                  "group_1": {
+                    "label": "Top 5 values of {group_field}",
                     "dataType": "string",
                     "operationType": "terms",
                     "scale": "ordinal",
@@ -75,7 +75,7 @@
                       "size": "5",
                       "orderBy": {
                         "type": "column",
-                        "columnId": "{metric_accessor_id}"
+                        "columnId": "metric_1"
                       },
                       "orderDirection": "desc",
                       "otherBucket": true,
@@ -89,7 +89,7 @@
                       "excludeIsRegex": false
                     }
                   },
-                  "{metric_accessor_id}": {
+                  "metric_1": {
                     "label": "Count of records",
                     "dataType": "number",
                     "operationType": "count",
@@ -101,7 +101,7 @@
                     }
                   }
                 },
-                "columnOrder": ["{group_accessor_id}", "{metric_accessor_id}"],
+                "columnOrder": ["group_1", "metric_1"],
                 "incompleteColumns": {},
                 "sampling": 1,
                 "indexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"

@@ -5,26 +5,26 @@
     "y": 0,
     "w": 12,
     "h": 12,
-    "i": "{panel_id}"
+    "i": "metric_panel_id"
   },
-  "panelIndex": "{panel_id}",
+  "panelIndex": "metric_panel_id",
   "panelConfig": {
     "attributes": {
-      "title": "{title}",
+      "title": "Metric visualization",
       "visualizationType": "lnsMetric",
       "type": "lens",
       "references": [
         {
           "type": "index-pattern",
           "id": "90943e30-9a47-11e8-b64d-95841ca0b247",
-          "name": "indexpattern-datasource-layer-{layer_id}"
+          "name": "indexpattern-datasource-layer-metric_layer_id"
         }
       ],
       "state": {
         "visualization": {
-          "layerId": "{layer_id}",
+          "layerId": "metric_layer_id",
           "layerType": "data",
-          "metricAccessor": "{column_id}"
+          "metricAccessor": "column_1"
         },
         "query": {
           "query": "",
@@ -34,9 +34,9 @@
         "datasourceStates": {
           "formBased": {
             "layers": {
-              "{layer_id}": {
+              "metric_layer_id": {
                 "columns": {
-                  "{column_id}": {
+                  "column_1": {
                     "label": "Count of records",
                     "dataType": "number",
                     "operationType": "count",
@@ -49,7 +49,7 @@
                     "customLabel": true
                   }
                 },
-                "columnOrder": ["{column_id}"],
+                "columnOrder": ["column_1"],
                 "incompleteColumns": {},
                 "sampling": 1,
                 "indexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"
