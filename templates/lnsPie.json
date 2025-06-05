@@ -65,11 +65,11 @@
               "pie_layer_id": {
                 "columns": {
                   "group_1": {
-                    "label": "Top 5 values of {group_field}",
+                    "label": "Top 5 values of {field}",
                     "dataType": "string",
                     "operationType": "terms",
                     "scale": "ordinal",
-                    "sourceField": "{group_field}",
+                    "sourceField": "{field}",
                     "isBucketed": true,
                     "params": {
                       "size": "5",

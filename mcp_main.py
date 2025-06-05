@@ -4,7 +4,7 @@ import logging  # TODO: remove this
 import os
 import uuid
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Literal, Optional
 
 import requests
 from dotenv import load_dotenv
@@ -12,23 +12,22 @@ from elasticsearch import Elasticsearch
 from langchain_openai import ChatOpenAI
 from mcp.server.fastmcp import FastMCP
 from openai import OpenAI
+from pydantic import BaseModel, Field
 
 load_dotenv()
 
 
-from pydantic import BaseModel
+class Visualization(BaseModel):
+    title: str = Field(description="The dashboard title")
+    type: List[Literal["pie", "bar", "metric"]]
+    field: Optional[str] = Field(
+        description="The field that this visualization use based on the provided mappings"
+    )
 
 
-class ChartType(str, Enum):
-    lnsMetric = "metric chart"
-    lnsPie = "pie chart"
-    lnsXY = "xy chart"
-
-
-class ChartResultModel(BaseModel):
-    chart_type: ChartType
-    group_by_field: Optional[str]  # Main field for chart
-    number_of_charts: int
+class Dashboard(BaseModel):
+    title: str = Field(description="The dashboard title")
+    visualizations: List[Visualization]
 
 
 class KibanaDashboardGenerator:
@@ -50,35 +49,31 @@ class KibanaDashboardGenerator:
 
     def _load_templates(self) -> Dict[str, Any]:
         """Load visualization templates from JSON files"""
+
         templates = {}
         template_dir = os.path.join(os.path.dirname(__file__), "templates")
 
-        for chart_type in ChartType:
-            match chart_type:
-                case ChartType.lnsMetric:
-                    template_file = os.path.join(template_dir, "lnsMetric.json")
-                case ChartType.lnsPie:
-                    template_file = os.path.join(template_dir, "lnsPie.json")
-                case ChartType.lnsXY:
-                    template_file = os.path.join(template_dir, "lnsXY.json")
-                case _:
-                    raise ValueError(f"Invalid chart type: {chart_type}")
+        for vis_type in ["pie", "bar", "metric"]:
+            template_file = os.path.join(
+                template_dir, f"lns{vis_type.capitalize()}.json"
+            )
 
             try:
                 with open(template_file, "r") as f:
-                    templates[chart_type.value] = json.load(f)
+                    templates[vis_type] = json.load(f)
             except FileNotFoundError:
                 print(f"Warning: Template file {template_file} not found")
-                templates[chart_type.value] = {}
+                templates[vis_type] = {}
 
         return templates
 
     def analyze_image_and_match_fields(
         self, image_base64: str, index_mappings: str
-    ) -> List["ChartResultModel"]:
-        """Analyze Dashboard image and match fields using OpenAI Vision, returning both analysis and field mapping in one call."""
+    ) -> Dashboard:
+        """Analyze Dashboard image and match fields using OpenAI Vision, returning a Dashboard model."""
 
-        chart_schema = json.dumps(ChartResultModel.model_json_schema(), indent=2)
+        dashboard_schema = json.dumps(Dashboard.model_json_schema(), indent=2)
+
         prompt = f"""
         You are an expert in analyzing Kibana dashboards from images for the version 9.0.0 of Kibana.
 
@@ -90,31 +85,29 @@ class KibanaDashboardGenerator:
         Index Mappings:
         {index_mappings}
 
-        For each chart you detect, return a JSON object with the following structure (see JSON schema below):
-        {chart_schema}
+        Return a JSON object with the following structure (see JSON schema below):
+        {dashboard_schema}
         
-        There some things to consider:
-        - group_by_field: List of fields that are relevant for the chart, this is the data that will be used to generate the chart and can be found in the index mappings.
-        - If you choose one field have multi-field, you can use the field name with the suffix .keyword to get the multi-field. For example: 
-        
-        'field_name': {{
-            'type': 'text',
-            'fields': {{
-                'keyword': {{
-                    'type': 'keyword',
+        There are some things to consider:
+        - field: The field that is relevant for the visualization, this is the data that will be used to generate the chart and can be found in the index mappings.
+        - If you choose a field that has multi-field, you can use the field name with the suffix .keyword to get the multi-field. For example: 
+            'field_name': {{
+                'type': 'text',
+                'fields': {{
+                    'keyword': {{
+                        'type': 'keyword',
+                    }}
                 }}
             }}
-        }}
-        Here you can use the field_name.keyword to get the multi-field.
+            Here you can use the field_name.keyword to get the multi-field.
+            
+            'field_name': {{
+                'type': 'keyword',
+            }}
+            Here you can use the field_name to get the single field.
         
-        'field_name': {{
-            'type': 'keyword',
-        }}
-        Here you can use the field_name to get the single field.
-        
-        Only include the fields that are relevant for each chart, based on what is visible in the image. The output must be a JSON array, with one object per chart.
+        - Only include the fields that are relevant for each visualization, based on what is visible in the image. The output must be a JSON object matching the schema above.
         """
-
         try:
             response = self.openai_client.chat.completions.create(
                 model="gpt-4o-mini",
@@ -137,19 +130,11 @@ class KibanaDashboardGenerator:
 
             content = response.choices[0].message.content
             result = json.loads(content)
+            dashboard = Dashboard(**result)
 
-            # Validate and parse as list of ChartResultModel
-            if isinstance(result, list):
-                charts = [ChartResultModel(**item) for item in result]
-            elif isinstance(result, dict) and "charts" in result:
-                charts = [ChartResultModel(**item) for item in result["charts"]]
-            else:
-                charts = []
+            logging.info(f"Dashboard: {dashboard}")
 
-            logging.info(f"Charts: {charts}")
-
-            return charts
-
+            return dashboard
         except Exception as e:
             return {"error": f"Failed to analyze image and match fields: {str(e)}"}
 
@@ -161,41 +146,23 @@ class KibanaDashboardGenerator:
         except Exception as e:
             return {"error": f"Failed to get mappings: {str(e)}"}
 
-    def get_chart_template(self, chart_type: str) -> Dict[str, Any]:
-        """Get the Lens template for the specified chart type"""
-        return self.templates.get(chart_type, self.templates.get("xy chart", {}))
+    def get_chart_template(self, vis_type: str) -> Dict[str, Any]:
+        """Get the Lens template for the specified visualization type"""
+        return self.templates.get(vis_type, self.templates.get("bar", {}))
 
     def fill_template_with_analysis(
         self,
         template: Dict[str, Any],
-        chart: "ChartResultModel",
+        visualization: Visualization,
     ) -> Dict[str, Any]:
-        """Fill the Lens template with the analyzed data and matched fields (ChartResultModel)"""
+        """Fill the Lens template with the analyzed data and matched fields (Visualization)"""
 
         template_str = json.dumps(template)
-        chart_type = (
-            chart.chart_type.value
-            if isinstance(chart.chart_type, Enum)
-            else chart.chart_type
-        )
-
-        replacements = {}
-
-        if chart_type == "pie chart":
-            group_field = chart.group_by_field or "category.keyword"
-            replacements.update(
-                {
-                    "{group_field}": group_field,
-                }
-            )
-        elif chart_type == "xy chart":
-            x_field = chart.group_by_field or "category.keyword"
-            replacements.update(
-                {
-                    "{x_field}": x_field,
-                }
-            )
-
+        replacements = {
+            "{title}": visualization.title,
+        }
+        if visualization.field:
+            replacements["{field}"] = visualization.field
         for placeholder, value in replacements.items():
             template_str = template_str.replace(placeholder, str(value))
 
@@ -218,7 +185,7 @@ class KibanaDashboardGenerator:
             dashboard_config = {
                 "attributes": {
                     "title": dashboard_title,
-                    "description": "Generated by MCP",
+                    "description": "Generated by AI",
                     "timeRestore": False,
                     "panels": panels,
                     "timeFrom": "now-7d/d",
@@ -273,24 +240,23 @@ def analyze_chart_and_create_dashboard(
 
         mappings = generator.get_elasticsearch_mappings(generator.index_name)
 
-        charts = generator.analyze_image_and_match_fields(
+        dashboard = generator.analyze_image_and_match_fields(
             image_base64, json.dumps(mappings, indent=2)
         )
 
-        if not charts or isinstance(charts, dict) and "error" in charts:
-            return {"error": "No charts detected or error in analysis."}
+        if not dashboard or isinstance(dashboard, dict) and "error" in dashboard:
+            return {"error": "No dashboard detected or error in analysis."}
 
         panels = []
-        for chart in charts:
-            template = generator.get_chart_template(
-                chart.chart_type.value
-                if isinstance(chart.chart_type, Enum)
-                else chart.chart_type
-            )
-            filled_panel = generator.fill_template_with_analysis(template, chart)
-            panels.append(filled_panel)
+        for vis in dashboard.visualizations:
+            for vis_type in vis.type:
+                template = generator.get_chart_template(vis_type)
+                filled_panel = generator.fill_template_with_analysis(template, vis)
+                panels.append(filled_panel)
 
         dashboard_result = generator.create_kibana_dashboard(panels, dashboard_title)
+
+        logging.info(f"Dashboard result: {dashboard_result}")
 
         return dashboard_result["dashboard_url"]
 

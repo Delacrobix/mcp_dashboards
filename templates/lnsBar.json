@@ -94,7 +94,7 @@
                     "dataType": "string",
                     "operationType": "terms",
                     "scale": "ordinal",
-                    "sourceField": "{x_field}",
+                    "sourceField": "{field}",
                     "isBucketed": true,
                     "params": {
                       "size": 5,
