@@ -1,5 +1,6 @@
 import base64
 import json
+import logging
 import os
 import uuid
 from datetime import datetime
@@ -37,7 +38,7 @@ class TemplateFields(BaseModel):
 
 # TODO: Analyze if there are more fields that can be removed from the prompt
 class AnalysisModel(BaseModel):
-    chart_type: str  # "metric chart" | "pie chart" | "xy chart"
+    chart_type: ChartType
     data_fields: List[str]
     description: str
 
@@ -150,9 +151,7 @@ class KibanaDashboardGenerator:
             content = response.choices[0].message.content
             result = json.loads(content)
 
-            charts = TypeAdapter(List[ChartResultModel]).validate_python(result)
-
-            return charts
+            return result
 
         except Exception as e:
             return {"error": f"Failed to analyze image and match fields: {str(e)}"}
@@ -176,6 +175,8 @@ class KibanaDashboardGenerator:
         matched_fields: Dict[str, Any],
     ) -> Dict[str, Any]:
         """Fill the Lens template with the analyzed data and matched fields"""
+
+        logging.info(f"Filling template with analysis: {analysis}")
 
         # Generate unique IDs for the visualization
         panel_id = str(uuid.uuid4())
