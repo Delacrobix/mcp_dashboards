@@ -1,14 +1,14 @@
 {
   "type": "lens",
   "gridData": {
-    "x": 0,
+    "x": 12,
     "y": 12,
-    "w": 25,
+    "w": 13,
     "h": 12,
     "i": "{panel_id}"
   },
   "panelIndex": "{panel_id}",
-  "embeddableConfig": {
+  "panelConfig": {
     "attributes": {
       "title": "{title}",
       "visualizationType": "lnsXY",
@@ -16,7 +16,7 @@
       "references": [
         {
           "type": "index-pattern",
-          "id": "{index_pattern_id}",
+          "id": "90943e30-9a47-11e8-b64d-95841ca0b247",
           "name": "indexpattern-datasource-layer-{layer_id}"
         }
       ],
@@ -48,13 +48,13 @@
             "yLeft": true,
             "yRight": true
           },
-          "preferredSeriesType": "{series_type}",
+          "preferredSeriesType": "bar_stacked",
           "layers": [
             {
               "layerId": "{layer_id}",
               "accessors": ["{y_accessor_id}"],
               "position": "top",
-              "seriesType": "{series_type}",
+              "seriesType": "bar_stacked",
               "showGridlines": false,
               "layerType": "data",
               "colorMapping": {
@@ -97,12 +97,12 @@
                     "sourceField": "{x_field}",
                     "isBucketed": true,
                     "params": {
-                      "size": "{size}",
+                      "size": "5",
+                      "orderDirection": "desc",
                       "orderBy": {
                         "type": "column",
                         "columnId": "{y_accessor_id}"
                       },
-                      "orderDirection": "desc",
                       "otherBucket": false,
                       "missingBucket": false,
                       "parentFormat": {
@@ -120,7 +120,7 @@
                     "operationType": "{y_operation_type}",
                     "isBucketed": false,
                     "scale": "ratio",
-                    "sourceField": "{y_field}",
+                    "sourceField": "___records___",
                     "params": {
                       "emptyAsNull": true
                     }
@@ -129,10 +129,10 @@
                 "columnOrder": ["{x_accessor_id}", "{y_accessor_id}"],
                 "incompleteColumns": {},
                 "sampling": 1,
-                "indexPatternId": "{index_pattern_id}"
+                "indexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"
               }
             },
-            "currentIndexPatternId": "{index_pattern_id}"
+            "currentIndexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"
           },
           "indexpattern": {
             "layers": {}

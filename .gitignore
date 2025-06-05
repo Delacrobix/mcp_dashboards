@@ -1,2 +1,6 @@
 /venv/
 .env
+/utils/
+/examples
+/tmp/
+/__pycache__/

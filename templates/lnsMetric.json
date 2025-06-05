@@ -16,7 +16,7 @@
       "references": [
         {
           "type": "index-pattern",
-          "id": "{index_pattern_id}",
+          "id": "90943e30-9a47-11e8-b64d-95841ca0b247",
           "name": "indexpattern-datasource-layer-{layer_id}"
         }
       ],
@@ -24,7 +24,7 @@
         "visualization": {
           "layerId": "{layer_id}",
           "layerType": "data",
-          "metricAccessor": "{metric_accessor_id}"
+          "metricAccessor": "{column_id}"
         },
         "query": {
           "query": "",
@@ -36,10 +36,10 @@
             "layers": {
               "{layer_id}": {
                 "columns": {
-                  "{metric_accessor_id}": {
-                    "label": "{metric_label}",
+                  "{column_id}": {
+                    "label": "Count of records",
                     "dataType": "number",
-                    "operationType": "{operation_type}",
+                    "operationType": "count",
                     "isBucketed": false,
                     "scale": "ratio",
                     "sourceField": "___records___",
@@ -49,13 +49,13 @@
                     "customLabel": true
                   }
                 },
-                "columnOrder": ["{metric_accessor_id}"],
+                "columnOrder": ["{column_id}"],
                 "incompleteColumns": {},
                 "sampling": 1,
-                "indexPatternId": "{index_pattern_id}"
+                "indexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"
               }
             },
-            "currentIndexPatternId": "{index_pattern_id}"
+            "currentIndexPatternId": "90943e30-9a47-11e8-b64d-95841ca0b247"
           },
           "indexpattern": {
             "layers": {}
