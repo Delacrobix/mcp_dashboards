@@ -10,7 +10,7 @@
   "panelIndex": "xy_panel_id",
   "panelConfig": {
     "attributes": {
-      "title": "XY chart",
+      "title": "{title}",
       "visualizationType": "lnsXY",
       "type": "lens",
       "references": [

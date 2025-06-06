@@ -10,7 +10,7 @@
   "panelIndex": "metric_panel_id",
   "panelConfig": {
     "attributes": {
-      "title": "Metric visualization",
+      "title": "{title}",
       "visualizationType": "lnsMetric",
       "type": "lens",
       "references": [

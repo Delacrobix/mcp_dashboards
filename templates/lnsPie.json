@@ -10,7 +10,7 @@
   "panelIndex": "pie_panel_id",
   "panelConfig": {
     "attributes": {
-      "title": "Pie chart",
+      "title": "{title}",
       "visualizationType": "lnsPie",
       "type": "lens",
       "references": [
