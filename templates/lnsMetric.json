@@ -1,8 +1,8 @@
 {
   "type": "lens",
   "gridData": {
-    "x": 0,
-    "y": 0,
+    "x": "{x}",
+    "y": "{y}",
     "w": 12,
     "h": 12,
     "i": "metric_panel_id"
@@ -37,12 +37,12 @@
               "metric_layer_id": {
                 "columns": {
                   "column_1": {
-                    "label": "Count of records",
+                    "label": "Unique count of {field}",
                     "dataType": "number",
-                    "operationType": "count",
+                    "operationType": "unique_count",
                     "isBucketed": false,
                     "scale": "ratio",
-                    "sourceField": "___records___",
+                    "sourceField": "{field}",
                     "params": {
                       "emptyAsNull": true
                     },
